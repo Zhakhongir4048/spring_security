@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>All employees</title>
+</head>
+<body>
+
+<h3>Information for all employees</h3>
+
+<br><br>
+<span sec:authorize="isAuthenticated()">| Logged user: <span sec:authentication="name"></span> |
+                Roles: <span sec:authentication="principal.authorities"></span> |
+    <a th:href="@{/logout}">Sign Out</a>
+</span>
+
+<br><br>
+<div sec:authorize="hasRole('HR')">
+    <input type="button" value="Salary" onclick="window.location.href = 'hr_info'">
+    Only for HR staff
+</div>
+
+<br><br>
+<div sec:authorize="hasRole('MANAGER')">
+    <input type="button" value="Performance" onclick="window.location.href = 'manager_info'">
+    Only for Managers
+</div>
+
+</body>
+</html>
